@@ -21,15 +21,15 @@ treeMethods.addChild = function(value){
 };
 
 treeMethods.contains = function(target){
-  var val = false;
+  var isFound = false;
   if(this.value === target){
-    val = true;
+    isFound = true;
   }else{
     for(var i = 0; i < this.children.length; i++){
-      val = val || this.children[i].contains(target);
+      isFound = isFound || this.children[i].contains(target);
     }
   }
-  return val;
+  return isFound;
 };
 
 
