@@ -23,7 +23,7 @@ treeMethods.addChild = function(value){
 treeMethods.contains = function(target){
   var isFound = false;
   if(this.value === target){
-    isFound = true;
+    return true;
   }else{
     for(var i = 0; i < this.children.length; i++){
       isFound = isFound || this.children[i].contains(target);
@@ -36,4 +36,8 @@ treeMethods.contains = function(target){
 
 /*
  * Complexity: What is the time complexity of the above functions?
+addChild - big O notation O(1)
+
+contains - big O notation
+
  */
