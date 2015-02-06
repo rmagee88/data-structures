@@ -4,54 +4,46 @@ var HashTable = function(){
 };
 
 HashTable.prototype.insert = function(k, v){
-  console.log("k: " +k);
-  console.log("v: "+v)
   var i = getIndexBelowMaxForKey(k, this._limit);
 
+  // space is not open
   if(this._storage.get(i) !== undefined){
-    var previous = this._storage.get(i);
-    if(!Array.isArray(previous)){
-      previous = [previous];
-    }
-    this._storage.set(i,previous.concat(v));
+    var result = this._storage.get(i);
+    result.push([k,v]);
+    this._storage.set(i, result);
   }else{
-  //   this._limit = this._limit*2;
-
-  //   var oldStorage = this._storage;
-  //   this._storage = LimitedArray(this._limit);
-
-  //   oldStorage.each(function(value, key, array){
-  //     this.insert(value, value);
-  //   });
-
-  //   this.insert(k,v);
-  //   // return   //redo index for imput
-  // }else{
-    this._storage.set(i, v);
+    //space is open
+    this._storage.set(i, [[k, v]]);
   }
-  // }
 
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var result = this._storage.get(i);
-  if(Array.isArray(result)){
 
-    for(var i = 0; i < result.length; i++){
-      if(result[i] === k){
-        return k;
-      }
+  for(var i = 0; i < result.length; i++){
+    if(result[i][0] === k){
+      return result[i][1];
     }
   }
-  // ["hello", "hi", "what", "adsfasd", "Adsfasdf "]
-  return this._storage.get(i);
+
+  return null;
 };
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
 
-  this._storage.set(i, null);
+  var result = this._storage.get(i);
+  if(result !== undefined) {
+    for(var j = 0; j < result.length; j++){
+      if(result[j][0] === k){
+        var newArray = result.slice(0,j-1).concat(result.slice(j+1));
+        this._storage.set(i, newArray);
+      }
+    }
+  }
+
 };
 
 
