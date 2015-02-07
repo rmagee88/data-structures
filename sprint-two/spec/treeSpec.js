@@ -41,7 +41,7 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
-  it('should work for extra credit', function(){
+  it('should work for extra credit (part 1)', function(){
     tree.addChild(5);
     tree.children[0].addChild(4);
     tree.children[0].addChild(3);
@@ -57,5 +57,27 @@ describe('tree', function() {
     expect(babyTree.contains(-1)).to.equal(true);
     expect(babyTree.contains(4)).to.equal(false);
 
+  });
+
+  it('should traverse the tree with a callback', function(){
+    tree.addChild(5);
+    tree.children[0].addChild(4);
+    tree.children[0].addChild(3);
+    tree.children[0].addChild(2);
+    tree.children[0].children[0].addChild(1);
+    tree.children[0].children[0].children[0].addChild(-1);
+
+    tree.traverse(function(value){
+      debugger;
+      this.value = value + 10;
+      debugger;
+    })
+    debugger;
+    expect(tree.contains(15)).to.equal(true);
+    expect(tree.contains(13)).to.equal(true);
+    expect(tree.contains(9)).to.equal(true);
+    expect(tree.contains(14)).to.equal(true);
+    debugger;
+    console.log(tree);
   });
 });

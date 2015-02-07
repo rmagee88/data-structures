@@ -10,10 +10,6 @@ var Tree = function(value){
   return newTree;
 };
 
-
-
-
-
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
@@ -53,6 +49,19 @@ treeMethods.removeFromParent = function() {
     this.parent = null;
 
   }
+
+treeMethods.traverse = function (callback) {
+  var fn = callback.bind(this);
+
+  if(this.value){
+    fn(this.value);
+  }
+
+  for(var i = 0; i < this.children.length; i++){
+    this.children[i].traverse(callback);
+  }
+
+}
 
 
 };
