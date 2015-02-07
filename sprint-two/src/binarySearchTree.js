@@ -61,13 +61,34 @@ BinarySearchTree.prototype.contains = function(value) {
 };
 
 BinarySearchTree.prototype.depthFirstLog = function(callback) {
-  callback(this.value)
+  callback(this.value);
 
   if(this.left) this.left.depthFirstLog(callback);
 
   if(this.right) this.right.depthFirstLog(callback);
 };
 
+BinarySearchTree.prototype.breadthFirstLog = function(callback){
+
+  var queue = [];
+
+  queue.push(this);
+  var getLineUp = function(context) {
+
+    context.left && queue.push(context.left);
+    context.right && queue.push(context.right);
+
+    context.left && getLineUp(context.left);
+    context.right && getLineUp(context.right);
+
+  };
+  getLineUp(this);
+
+  while(queue.length !== 0){
+    callback(queue.shift().value);
+  }
+
+};
 /*
  * Complexity: What is the time complexity of the above functions?
  insert - O(log(n))

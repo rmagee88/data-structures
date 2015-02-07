@@ -74,6 +74,5 @@ describe('tree', function() {
     expect(tree.contains(13)).to.equal(true);
     expect(tree.contains(9)).to.equal(true);
     expect(tree.contains(14)).to.equal(true);
-    console.log(tree);
   });
 });
