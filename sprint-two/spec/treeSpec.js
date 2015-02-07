@@ -41,4 +41,21 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should work for extra credit', function(){
+    tree.addChild(5);
+    tree.children[0].addChild(4);
+    tree.children[0].addChild(3);
+    tree.children[0].addChild(2);
+    tree.children[0].children[0].addChild(1);
+    tree.children[0].children[0].children[0].addChild(-1);
+    var babyTree = tree.children[0].children[0].children[0];
+
+    babyTree.removeFromParent();
+
+    expect(tree.contains(1)).to.equal(false);
+    expect(tree.contains(3)).to.equal(true);
+    expect(babyTree.contains(-1)).to.equal(true);
+    expect(babyTree.contains(4)).to.equal(false);
+
+  });
 });
