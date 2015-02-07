@@ -38,8 +38,8 @@ HashTable.prototype.remove = function(k){
   if(result !== undefined) {
     for(var j = 0; j < result.length; j++){
       if(result[j][0] === k){
-        var newArray = result.slice(0,j-1).concat(result.slice(j+1));
-        this._storage.set(i, newArray);
+        result.splice(j, 1);
+        this._storage.set(i, result);
       }
     }
   }

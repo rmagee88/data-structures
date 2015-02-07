@@ -23,7 +23,7 @@ Graph.prototype.removeNode = function(node){
   // delete from the storage array
   for (var i = 0; i < this.storage.length; i++) {
     if (node === this.storage[i]) {
-      this.storage = this.storage.slice(0, i - 1).concat(this.storage.slice(i + 1));
+      this.storage.splice(i, 1);
     }
   }
   // call remove Edge with same node for both nodes
@@ -55,7 +55,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
   for (var i = 0; i < this.edges.length; i++) {
     if (this.edges[i][0] === fromNode && this.edges[i][1] === toNode ||
       this.edges[i][0] === toNode && this.edges[i][1] === fromNode) {
-      this.edges = this.edges.slice(0, i - 1).concat(this.edges.slice(i + 1));
+      this.edges.splice(i, 1);
     }
   }
 
@@ -70,6 +70,21 @@ Graph.prototype.forEachNode = function(cb){
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ *
+ * addnode: O(1)
+ *
+ * contains: O(n)
+ *
+ * removenode: O(n)
+ *
+ * hasEdge: O(n)
+ *
+ * addEdge: O(n)
+ *
+ * removeEdge: O(n)
+ *
+ * fromEachNode o(n)
+ *
  */
 
 
