@@ -68,16 +68,12 @@ describe('tree', function() {
     tree.children[0].children[0].children[0].addChild(-1);
 
     tree.traverse(function(value){
-      debugger;
       this.value = value + 10;
-      debugger;
     })
-    debugger;
     expect(tree.contains(15)).to.equal(true);
     expect(tree.contains(13)).to.equal(true);
     expect(tree.contains(9)).to.equal(true);
     expect(tree.contains(14)).to.equal(true);
-    debugger;
     console.log(tree);
   });
 });
