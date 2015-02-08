@@ -11,8 +11,15 @@ HashTable.prototype.insert = function(k, v){
   // space is not open
   if(this._storage.get(i) !== undefined){
     var result = this._storage.get(i);
-    result.push([k,v]);
-    this._storage.set(i, result);
+    var hasValue = false;
+    for (var i = 0; i < result.length; i++) {
+      if (result[i][0] === k) {
+        result[i][1] = v;
+        hasValue = true;
+      }
+    }
+
+    !hasValue && result.push([k,v]);
 
   }else{
     //space is open
@@ -69,15 +76,13 @@ HashTable.prototype.resize = function(){
   var oldStorage = this._storage;
   this._storage = LimitedArray(this._limit);
   this._size = 0;
-
-  var this_context = this;
   oldStorage.each(function(value, key, array){
     if(Array.isArray(value)){
       for(var i = 0; i < value.length; i++){
-        this_context.insert(value[i][0], value[i][1]);
+        this.insert(value[i][0], value[i][1]);
       }
     }
-  });
+  }.bind(this));
 
 };
 
